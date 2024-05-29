@@ -1,0 +1,247 @@
+Ej 1 
+
+#include <stdio.h> 
+
+#define DIAS_SEMANA 7
+#define TEMATICAS 3 
+
+int main() {
+    int prestamos[DIAS_SEMANA][TEMATICAS] = {0};
+    int total_prestamos = 0;
+    int dia_mas_prestamos = 0;
+    int max_prestamos = 0; 
+
+    for (int i = 0; i < DIAS_SEMANA; i++) {
+        int total_prestamos_dia = 0;
+        printf("Día %d:\n", i + 1);
+        int codigo_libro, cantidad;
+        char tematica; 
+
+        do {
+            printf("Ingrese el código del libro (0 para finalizar): ");
+            scanf("%d", &codigo_libro);
+            if (codigo_libro == 0) break; 
+
+            printf("Ingrese la cantidad de ejemplares prestados: ");
+            scanf("%d", &cantidad); 
+
+            printf("Ingrese la temática (F - Ficción, H - Humanidades, C - Ciencia): ");
+            scanf(" %c", &tematica); 
+
+            switch (tematica) {
+                case 'F':
+                    prestamos[i][0] += cantidad;
+                    break;
+                case 'H':
+                    prestamos[i][1] += cantidad;
+                    break;
+                case 'C':
+                    prestamos[i][2] += cantidad;
+                    break;
+                default:
+                    printf("Tematica no válida.\n");
+                    break;
+            } 
+
+            total_prestamos_dia += cantidad;
+            total_prestamos += cantidad;
+        } while (codigo_libro != 0); 
+
+        printf("Total de libros prestados este día: %d\n", total_prestamos_dia);
+        printf("Cantidad de libros prestados por temática este día: Ficción: %d, Humanidades: %d, Ciencia: %d\n",
+               prestamos[i][0], prestamos[i][1], prestamos[i][2]); 
+
+        if (total_prestamos_dia > max_prestamos) {
+            max_prestamos = total_prestamos_dia;
+            dia_mas_prestamos = i + 1;
+        }
+    } 
+
+    printf("\nResumen total:\n");
+    printf("Cantidad total de libros prestados durante la semana: %d\n", total_prestamos);
+    printf("Cantidad de libros prestados por temática durante la semana: Ficción: %d, Humanidades: %d, Ciencia: %d\n",
+           prestamos[0][0] + prestamos[1][0] + prestamos[2][0] + prestamos[3][0] + prestamos[4][0] + prestamos[5][0] + prestamos[6][0],
+           prestamos[0][1] + prestamos[1][1] + prestamos[2][1] + prestamos[3][1] + prestamos[4][1] + prestamos[5][1] + prestamos[6][1],
+           prestamos[0][2] + prestamos[1][2] + prestamos[2][2] + prestamos[3][2] + prestamos[4][2] + prestamos[5][2] + prestamos[6][2]);
+    printf("Día con más libros prestados: Día %d, con %d libros prestados.\n", dia_mas_prestamos, max_prestamos); 
+
+    return 0;
+}
+
+
+
+Ej 2 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h> 
+
+int main() {
+    int num_monedas, cara_count = 0;
+    srand(time(0)); // Inicializar la semilla para los números aleatorios 
+
+    printf("¿Cuántas monedas quieres lanzar? ");
+    scanf("%d", &num_monedas); 
+
+    // Lanzar las monedas y contar las caras
+    printf("Resultado del lanzamiento de monedas:\n");
+    for (int i = 1; i <= num_monedas; i++) {
+        int resultado = rand() % 2; // Generar 0 (cara) o 1 (cruz)
+        if (resultado == 0) {
+            printf("Moneda %d: Cara\n", i);
+            cara_count++;
+        } else {
+            printf("Moneda %d: Cruz\n", i);
+        }
+    } 
+
+    printf("La suma total de caras es: %d\n", cara_count); 
+
+    return 0;
+}
+
+
+
+Ej 3 
+
+#include <stdio.h>
+#include <ctype.h> 
+
+int main() {
+    char input[1000];
+    printf("Ingrese las oraciones separadas por un punto: ");
+    gets(input); 
+
+    // Verificar y cambiar la letra inicial de cada oración a mayúscula
+    int i = 0;
+    while(input[i] != '\0') {
+        // Si la letra actual es minúscula y es la primera letra de una oración
+        if(islower(input[i]) && (i == 0 || input[i - 1] == '.')) {
+            input[i] = toupper(input[i]); // Cambiar a mayúscula
+        }
+        i++;
+    } 
+
+    // Imprimir el resultado
+    printf("Resultado:\n%s", input); 
+
+    return 0;
+} 
+
+
+
+
+
+Ej mayus 
+
+#include<stdio.h> 
+
+//minuscula a mayuscula 
+
+int main() {
+char cadena[101]; 
+
+printf("Ingrese una cadena (máx 100 caracteres) \n");
+gets(cadena); 
+
+for(int i = 0; cadena[i] != '\0' ; i++)
+    { if(cadena[i]>= 'a' && cadena[i] <='z') {
+        cadena[i]= cadena[i]-32;
+    }
+}
+printf("%s \n", cadena);
+return 0;
+} 
+
+
+
+
+Ej random 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+int main() { 
+
+    int numero_generado,caras,cantidad,suma=0; 
+
+    srand(time(NULL)); 
+
+    printf("¿Cuántos dados quieres tirar?\n");
+    scanf("%i",&cantidad); 
+
+    printf("¿De cuantas caras son los dados? (1-20)\n");
+    scanf("%i",&caras); 
+
+    for(int i=1; i<=cantidad;i++)
+    {
+        numero_generado = rand() % caras + 1;
+        printf("Dado %i = %i\n",i,numero_generado );
+        suma += numero_generado;
+    } 
+
+    printf("La suma de los resultados de los dados es: %i",suma); 
+
+} 
+
+
+
+Ej legajo 
+
+
+#include <stdio.h> 
+
+int main() {
+    int legajo, nota1, nota2, nota3, nota4;
+    int cantidad_alumnos = 0, aprobados = 0, desaprobados = 0;
+    float promedio, promedio_menor = 10.0;
+    int legajo_promedio_menor; 
+
+    printf("Ingrese el número de legajo, un número entero distinto de 0: ");
+    scanf("%d", &legajo); 
+
+    while (legajo != 0) {
+        printf("Ingrese la nota 1: ");
+        scanf("%d", &nota1); 
+
+        printf("Ingrese la nota 2: ");
+        scanf("%d", &nota2); 
+
+        printf("Ingrese la nota 3: ");
+        scanf("%d", &nota3); 
+
+        printf("Ingrese la nota 4: ");
+        scanf("%d", &nota4); 
+
+        promedio = (nota1 + nota2 + nota3 + nota4) / 4.0;
+        printf("El alumno con legajo %d tiene un promedio de %.1f, el alumno está ", legajo, promedio); 
+
+        if (promedio >= 6.0) {
+            printf("aprobado.\n");
+            aprobados++;
+        } else {
+            printf("desaprobado.\n");
+            desaprobados++;
+        } 
+
+        // Actualizar el promedio menor y el número de legajo
+        if (promedio < promedio_menor) {
+            promedio_menor = promedio;
+            legajo_promedio_menor = legajo;
+        } 
+
+        cantidad_alumnos++; 
+
+        printf("\nIngrese el número de legajo, un número entero distinto de 0: ");
+        scanf("%d", &legajo);
+    } 
+
+    printf("\n---Resumen---\n");
+    printf("Total de alumnos: %d\n", cantidad_alumnos);
+    printf("Cantidad de aprobados: %d\n", aprobados);
+    printf("Cantidad de desaprobados: %d\n", desaprobados);
+    printf("Promedio menor: %.1f\n", promedio_menor);
+    printf("Número de legajo del alumno con el promedio menor: %d\n", legajo_promedio_menor); 
+
+    return 0;
+}
